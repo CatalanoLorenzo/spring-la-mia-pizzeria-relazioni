@@ -22,7 +22,9 @@ public class PizzaController {
 	public String getIndex(Model model) {
 
 		List<Pizza> pizzas = pizzaService.findAll();
-		model.addAttribute("pizzas", pizzas);
+		
+			model.addAttribute("pizzas", pizzas);
+	
 
 		return "pizza-index";
 	}

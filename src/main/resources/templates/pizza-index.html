@@ -5,10 +5,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Books:</h1>
-	<ul>
+	<h1>Pizzas:</h1>
+	<ul th:if="${pizzas.size > 0}" >
 		<li
-			th:each="pizza : ${pizzas}"
+			th:each="pizza : ${pizzas} == 'non ci sono pizze'"
 			th:object="${pizza}"
 		>
 			<a th:href="@{/pizzas/{id}(id=${id})}">
