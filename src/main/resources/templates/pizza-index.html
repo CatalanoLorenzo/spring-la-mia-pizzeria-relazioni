@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
+
 <body>
 	<h1>Pizzas:</h1>
-	<ul th:if="${pizzas.size > 0}" >
-		<li
-			th:each="pizza : ${pizzas} == 'non ci sono pizze'"
-			th:object="${pizza}"
-		>
-			<a th:href="@{/pizzas/{id}(id=${id})}">
-				[[*{nome}]] - [[*{prezzo}]]	€
-			</a>
+	<form>
+	<input type="text" name="nome" id="name" value="">
+	<input type="submit" id="name">		
+	</form>
+	<ul th:if="${pizzas.size > 0}">
+		<li th:each="pizza : ${pizzas}" th:object="${pizza}">
+			<p> [[*{nome}]] - [[*{prezzo}]] €</p>
+			<div class="btn btn-primary">
+				<a th:href="'/pizzas/' + ${pizza.getId()}">view</a>
+			</div>
 		</li>
 	</ul>
 </body>
+
 </html>

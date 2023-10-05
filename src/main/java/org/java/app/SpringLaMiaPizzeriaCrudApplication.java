@@ -31,10 +31,10 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		Pizza pizza3 = new Pizza("viustel e patataine", "mozzarella ,viustell,patataine",
 				"https://th.bing.com/th/id/R.4069db1e7bfd020ee68342db2a3fe58a?rik=mfkqyUrXh2KbCg&riu=http%3a%2f%2fwww.scattidigusto.it%2fwp-content%2fuploads%2f2015%2f11%2fpizza-wurstel-e-patatine.jpg&ehk=fyLPxmGBNht9evLBGSMZ1C%2fEO1twdwnw%2b%2f23ZS4RW9Q%3d&risl=&pid=ImgRaw&r=0",
 				5.0F);
-//
-//		pizzaService.save(pizza1);
-//		pizzaService.save(pizza2);
-//		pizzaService.save(pizza3);
+
+		pizzaService.save(pizza1);
+		pizzaService.save(pizza2);
+		pizzaService.save(pizza3);
 
 		System.out.println("Insert OK!");
 	}

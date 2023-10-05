@@ -11,17 +11,24 @@ public class PizzaService {
 
 	@Autowired
 	private PizzaRepo pizzaRepo;
-	
+
 	public void save(Pizza pizza) {
-		
+
 		pizzaRepo.save(pizza);
 	}
+
 	public List<Pizza> findAll() {
-		
+
 		return pizzaRepo.findAll();
 	}
+
 	public Pizza findById(int id) {
-		
+
 		return pizzaRepo.findById(id).get();
+	}
+
+	public List<Pizza> findByName(String nome) {
+
+		return pizzaRepo.findByNomeContaining(nome);
 	}
 }
