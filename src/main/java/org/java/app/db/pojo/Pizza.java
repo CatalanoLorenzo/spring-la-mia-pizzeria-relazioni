@@ -1,18 +1,13 @@
 package org.java.app.db.pojo;
 
 import org.hibernate.validator.constraints.Length;
-
-//import java.time.LocalDate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 
 @Entity
 public class Pizza {
@@ -22,21 +17,19 @@ public class Pizza {
 	private int id;
 
 	@Column(unique = true, nullable = false, length = 80)
-	@NotBlank
-	@Length(min = 4, max = 80)
+	@NotBlank(message = "campo obbligatorio ")
+	@Length(min = 4, max = 80 ,message = "parola troppo lunga o troppo corta")
 	private String nome;
 
 	@Column(columnDefinition = "text")
-	@Length(min = 10, max = 160)
+	@Length(min = 10, max = 160,message = "parola troppo lunga o troppo corta")
 	private String descrizione;
 
 	@Column(nullable = false)
-	@NotBlank
-	@Positive
+	@Positive(message = "numero deve essere maggiore di 0 ")
 	private float prezzo;
 
 	@Column(unique = true, length = 1000)
-	@Length(min = 4)
 	private String foto;
 
 	public Pizza() {
