@@ -1,5 +1,7 @@
 package org.java.app.db.pojo;
 
+import org.hibernate.validator.constraints.Length;
+
 //import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -8,6 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Pizza {
@@ -15,30 +20,25 @@ public class Pizza {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	@Column(unique = true, nullable = false, length = 80)
+	@NotBlank
+	@Length(min = 4, max = 80)
 	private String nome;
-	
-	@Lob
+
 	@Column(columnDefinition = "text")
+	@Length(min = 10, max = 160)
 	private String descrizione;
-	
-	
+
 	@Column(nullable = false)
+	@NotBlank
+	@Positive
 	private float prezzo;
 
-
-	@Column(unique = true,length = 1000)
+	@Column(unique = true, length = 1000)
+	@Length(min = 4)
 	private String foto;
-	
+
 	public Pizza() {
 	}
 
@@ -48,6 +48,14 @@ public class Pizza {
 		setFoto(foto);
 		setPrezzo(prezzo);
 
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {
