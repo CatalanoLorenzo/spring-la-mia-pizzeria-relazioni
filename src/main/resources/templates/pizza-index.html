@@ -9,8 +9,8 @@
 <body>
 	<h1>Pizzas:</h1>
 	<form>
-	<input type="text" name="nome" id="name" value="">
-	<input type="submit" id="name">		
+		<input type="text" name="nome" id="name" value="">
+		<input type="submit" id="name">
 	</form>
 	<div class="btn btn-primary">
 		<a th:href="@{/pizzas/create}">nuova pizza</a>
@@ -21,6 +21,14 @@
 			<div class="btn btn-primary">
 				<a th:href="'/pizzas/' + ${pizza.getId()}">view</a>
 			</div>
+			<div class="btn btn-primary">
+				<a th:href="'/pizzas/update/' + ${pizza.getId()}">edit</a>
+			</div>
+			<form method="post" th:action="'/pizzas/delete/'+ ${pizza.getId()}">
+				<input type="submit" id="delete">delete
+				
+			</form>
+		
 		</li>
 	</ul>
 </body>

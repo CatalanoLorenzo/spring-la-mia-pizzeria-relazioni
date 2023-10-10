@@ -50,7 +50,7 @@ public class PizzaController {
 	}
 
 	@PostMapping("/create")
-	public String storePizza(@Valid @ModelAttribute Pizza pizza,BindingResult bindingResult) {
+	public String storePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult) {
 		System.out.println(bindingResult.getErrorCount());
 
 		if (bindingResult.hasErrors()) {
@@ -61,6 +61,33 @@ public class PizzaController {
 
 		pizzaService.save(pizza);
 
+		return "redirect:/pizzas";
+	}
+
+	@GetMapping("/update/{id}")
+	public String editPizza(@PathVariable int id, Model model) {
+		Pizza pizza = pizzaService.findById(id);
+		model.addAttribute(pizza);
+		return "pizza-update";
+	}
+
+	@PostMapping("/update/{id}")
+	public String updatePizza(@Valid @ModelAttribute Pizza pizza, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			System.out.println(bindingResult.getErrorCount());
+
+			return "pizza-create";
+		}
+
+		pizzaService.save(pizza);
+		return "redirect:/pizzas";
+
+	}
+
+	@PostMapping("/delete/{id}")
+	public String deletePizza(@PathVariable int id) {
+		Pizza pizza = pizzaService.findById(id);
+		pizzaService.delete(pizza);
 		return "redirect:/pizzas";
 	}
 }
