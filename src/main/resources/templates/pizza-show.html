@@ -40,6 +40,9 @@
 				<a th:href="@{/offerte/edit/{id}(id=*{id})}">
 					edit
 				</a>
+				<form method="post" th:action="'/offerte/delete/'+ *{id}">
+					<input type="submit" value="Delete">Delete
+				</form>
 
 	</div>
 	</li>

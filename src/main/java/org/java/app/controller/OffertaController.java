@@ -62,5 +62,11 @@ public class OffertaController {
 		
 		return "redirect:/pizzas/" + pizza.getId();
 	}
-
+	@PostMapping("delete/{id}")
+	public String delete(@PathVariable int id) {
+		Offerta offerta = offertaService.findById(id);
+		Pizza pizza = offerta.getPizza();
+		offertaService.offertaDelete(offerta);
+		return "redirect:/pizzas/" + pizza.getId();
+	}
 }

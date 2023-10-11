@@ -17,4 +17,8 @@ public class OffertaService {
 
 		return offertaRepo.findById(id).get();
 	}
+	public void offertaDelete(Offerta offerta) {
+		 offertaRepo.delete(offerta);
+		
+	}
 }
