@@ -1,16 +1,20 @@
 package org.java.app.db.pojo;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.Length;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Pizza {
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +22,11 @@ public class Pizza {
 
 	@Column(unique = true, nullable = false, length = 80)
 	@NotBlank(message = "campo obbligatorio ")
-	@Length(min = 4, max = 80 ,message = "parola troppo lunga o troppo corta")
+	@Length(min = 4, max = 80, message = "parola troppo lunga o troppo corta")
 	private String nome;
 
 	@Column(columnDefinition = "text")
-	@Length(min = 10, max = 160,message = "parola troppo lunga o troppo corta")
+	@Length(min = 10, max = 160, message = "parola troppo lunga o troppo corta")
 	private String descrizione;
 
 	@Column(nullable = false)
@@ -31,6 +35,10 @@ public class Pizza {
 
 	@Column(unique = true, length = 1000)
 	private String foto;
+	
+	@OneToMany(mappedBy = "pizza")
+	private List<Offerta> offerte;
+
 
 	public Pizza() {
 	}
@@ -43,6 +51,14 @@ public class Pizza {
 
 	}
 
+	
+	public List<Offerta> getOfferte() {
+		return offerte;
+	}
+
+	public void setOfferte(List<Offerta> offerte) {
+		this.offerte = offerte;
+	}
 	public int getId() {
 		return id;
 	}
