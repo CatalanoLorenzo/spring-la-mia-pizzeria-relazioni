@@ -1,5 +1,5 @@
 package org.java.app.controller;
-
+//-------------------------------------------------------------------------------------------------
 import java.util.List;
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.pojo.PizzaService;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
-
-@Controller
-@RequestMapping("/pizzas")
+//-------------------------------------------------------------------------------------------------
+@Controller //Specifico che questo file è un controller
+@RequestMapping("/pizzas")//Dichiaro che la rotta principale inizia da "/pizzas"
 public class PizzaController {
-
+//------------------Iniezione Dipendenze Utili-----------------------------------------------
 	@Autowired
 	private PizzaService pizzaService;
-
+//-------------------------------------------------------------------------------------------------
 	@GetMapping
 	public String getIndex(Model model, @RequestParam(required = false) String nome) {
 
@@ -32,7 +32,7 @@ public class PizzaController {
 
 		return "pizza-index";
 	}
-
+//-------------------------------------------------------------------------------------------------
 	@GetMapping("/{id}")
 	public String getShow(@PathVariable int id, Model model) {
 
@@ -41,7 +41,7 @@ public class PizzaController {
 
 		return "pizza-show";
 	}
-
+//-------------------------------------------------------------------------------------------------
 	@GetMapping("/create")
 	public String createPizza(Model model) {
 		model.addAttribute("pizza", new Pizza());
@@ -63,7 +63,7 @@ public class PizzaController {
 
 		return "redirect:/pizzas";
 	}
-
+//-------------------------------------------------------------------------------------------------
 	@GetMapping("/update/{id}")
 	public String editPizza(@PathVariable int id, Model model) {
 		Pizza pizza = pizzaService.findById(id);
@@ -83,7 +83,7 @@ public class PizzaController {
 		return "redirect:/pizzas";
 
 	}
-
+//-------------------------------------------------------------------------------------------------
 	@PostMapping("/delete/{id}")
 	public String deletePizza(@PathVariable int id) {
 		Pizza pizza = pizzaService.findById(id);

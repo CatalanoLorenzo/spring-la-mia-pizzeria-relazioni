@@ -1,0 +1,5 @@
+org\java\app\db\pojo\Pizza.class
+org\java\app\SpringLaMiaPizzeriaCrudApplication.class
+org\java\app\controller\PizzaController.class
+org\java\app\db\pojo\PizzaService.class
+org\java\app\db\pojo\pizza\PizzaRepo.class
