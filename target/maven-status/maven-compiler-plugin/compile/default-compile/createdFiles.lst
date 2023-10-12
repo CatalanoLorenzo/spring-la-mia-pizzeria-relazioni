@@ -1,8 +1,12 @@
 org\java\app\db\pojo\Pizza.class
+org\java\app\controller\OffertaController.class
+org\java\app\db\pojo\Ingredienti.class
 org\java\app\controller\PizzaController.class
 org\java\app\db\pojo\OffertaService.class
 org\java\app\db\pojo\Offerta.class
 org\java\app\db\pojo\pizza\OffertaRepo.class
 org\java\app\SpringLaMiaPizzeriaCrudApplication.class
 org\java\app\db\pojo\PizzaService.class
+org\java\app\db\pojo\pizza\IngredientiRepo.class
 org\java\app\db\pojo\pizza\PizzaRepo.class
+org\java\app\db\pojo\IngredientiService.class

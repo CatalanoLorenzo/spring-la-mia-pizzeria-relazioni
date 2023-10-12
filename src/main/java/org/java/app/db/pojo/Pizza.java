@@ -1,5 +1,6 @@
 package org.java.app.db.pojo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
@@ -8,13 +9,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Pizza {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,23 +36,25 @@ public class Pizza {
 
 	@Column(unique = true, length = 1000)
 	private String foto;
-	
+
 	@OneToMany(mappedBy = "pizza")
 	private List<Offerta> offerte;
 
+	@ManyToMany
+	private List<Ingrediente> ingredientis;
 
 	public Pizza() {
 	}
 
-	public Pizza(String nome, String descrizione, String foto, float prezzo) {
+	public Pizza(String nome, String descrizione, String foto, float prezzo, Ingrediente... ingredientis) {
 		setNome(nome);
 		setDescrizione(descrizione);
 		setFoto(foto);
 		setPrezzo(prezzo);
+		setIngredienti(Arrays.asList(ingredientis));
 
 	}
 
-	
 	public List<Offerta> getOfferte() {
 		return offerte;
 	}
@@ -59,6 +62,7 @@ public class Pizza {
 	public void setOfferte(List<Offerta> offerte) {
 		this.offerte = offerte;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -99,9 +103,37 @@ public class Pizza {
 		this.prezzo = prezzo;
 	}
 
+	public List<Ingrediente> getIngredienti() {
+		return ingredientis;
+	}
+
+	public void setIngredienti(List<Ingrediente> ingredientis) {
+		this.ingredientis = ingredientis;
+	}
+
+	public boolean hasingredienti(Ingrediente ingrediente) {
+
+		for (Pizza pizza : ingrediente.getPizze()) {
+			if (pizza.getId()== this.getId()) {
+				return true;
+			}
+			
+		}
+		return false;
+	}
+
+	public void addIngredienti(Ingrediente ingrediente) {
+
+		getIngredienti().add(ingrediente);
+	}
+
+	public void removeIngredienti(Ingrediente ingrediente) {
+		List<Ingrediente> listaIgredienti= getIngredienti();
+		listaIgredienti.remove(ingrediente);
+	}
+
 	@Override
 	public String toString() {
 
 		return "new Pizza";
-	}
-}
+}}
