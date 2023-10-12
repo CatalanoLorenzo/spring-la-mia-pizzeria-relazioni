@@ -26,4 +26,9 @@ public class IngredienteService {
 
 		ingredienteRepo.save(ingrediente);
 	}
+
+	public void ingredienteDelete(Ingrediente ingrediente) {
+		ingredienteRepo.delete(ingrediente);
+		
+	}
 }

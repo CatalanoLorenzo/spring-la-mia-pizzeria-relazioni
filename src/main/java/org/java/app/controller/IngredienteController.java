@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.java.app.db.pojo.Ingrediente;
 import org.java.app.db.pojo.IngredienteService;
+import org.java.app.db.pojo.Offerta;
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.pojo.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class IngredienteController {
 	}
 
 	@PostMapping("/create")
-	public String IngredientiStore(@Valid @ModelAttribute Ingrediente ingrediente, BindingResult bindingResult,
+	public String ingredientiStore(@Valid @ModelAttribute Ingrediente ingrediente, BindingResult bindingResult,
 			Model model) {
 
 		System.out.println("Nuovo ingrediente:\n" + ingrediente);
@@ -79,7 +80,7 @@ public class IngredienteController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String IngredientiUpdate(@Valid @ModelAttribute Ingrediente ingrediente, BindingResult bindingResult,
+	public String ingredientiUpdate(@Valid @ModelAttribute Ingrediente ingrediente, BindingResult bindingResult,
 			Model model) {
 		System.out.println("Nuovo ingrediente:\n" + ingrediente);
 		System.out.println("ingredienti pizze:\n" + ingrediente.getPizze());
@@ -98,5 +99,15 @@ public class IngredienteController {
 		
 
 		return "redirect:/ingredienti";
+	}
+	@PostMapping("delete/{id}")
+	public String ingredienteDelete(@PathVariable int id) {
+		Ingrediente ingrediente = ingredienteService.findById(id);
+		List<Pizza> pizze = ingrediente.getPizze();
+		ingredienteService.ingredienteDelete(ingrediente);
+		for (Pizza pizza : pizze) {
+		pizza.getIngredienti().remove(ingrediente);
+		}
+		return "redirect:/ingredienti/";
 	}
 }
