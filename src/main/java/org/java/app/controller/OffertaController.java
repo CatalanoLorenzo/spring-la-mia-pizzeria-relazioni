@@ -1,9 +1,9 @@
 package org.java.app.controller;
 
 import org.java.app.db.pojo.Offerta;
-import org.java.app.db.pojo.OffertaService;
 import org.java.app.db.pojo.Pizza;
-import org.java.app.db.pojo.PizzaService;
+import org.java.app.db.service.OffertaService;
+import org.java.app.db.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

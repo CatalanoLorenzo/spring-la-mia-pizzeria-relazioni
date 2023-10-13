@@ -6,15 +6,20 @@ package org.java.app;
 import java.time.LocalDate;
 
 import org.java.app.db.pojo.Ingrediente;
-import org.java.app.db.pojo.IngredienteService;
 import org.java.app.db.pojo.Offerta;
-import org.java.app.db.pojo.OffertaService;
 import org.java.app.db.pojo.Pizza;
-import org.java.app.db.pojo.PizzaService;
+import org.java.app.db.service.IngredienteService;
+import org.java.app.db.service.OffertaService;
+import org.java.app.db.service.PizzaService;
+import org.java.app.db.service.RoleService;
+import org.java.app.db.service.UserService;
+import org.java.app.mvc.auth.pojo.Role;
+import org.java.app.mvc.auth.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
@@ -24,7 +29,11 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	@Autowired
 	private OffertaService offertaService;
 	@Autowired
-	private IngredienteService ingredienteService;
+	private IngredienteService ingredienteService; 
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private RoleService roleService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -66,6 +75,21 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		offertaService.OffertaSave(offerta1);
 		offertaService.OffertaSave(offerta2);
 		offertaService.OffertaSave(offerta3);
+		Role admin = new Role("ADMIN");
+		Role user = new Role("USER");
+		
+		roleService.save(admin);
+		roleService.save(user);
+		
+		final String pwsAdmin = new BCryptPasswordEncoder().encode("pws");
+		final String pwsUser = new BCryptPasswordEncoder().encode("pws");
+		
+		User guybrushAdmin = new User("guybrushAdmin", pwsAdmin, admin, user);
+		User guybrushUser = new User("guybrushUser", pwsUser, user);
+		
+		userService.save(guybrushAdmin);
+		userService.save(guybrushUser);
+		
 
 	}
 }

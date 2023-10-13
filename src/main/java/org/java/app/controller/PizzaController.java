@@ -2,7 +2,7 @@ package org.java.app.controller;
 //-------------------------------------------------------------------------------------------------
 import java.util.List;
 import org.java.app.db.pojo.Pizza;
-import org.java.app.db.pojo.PizzaService;
+import org.java.app.db.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
